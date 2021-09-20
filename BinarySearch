@@ -1,0 +1,2 @@
+//Búsqueda binaria
+/*La búsqueda binaria se encarga de encontrar un número en un determinado vector, por ejemplo, si tenemos un vector de 32 posiciones, la búsqueda binaria buscará el número objetivo dentro del vector buscando desde la mitad hacia los lados, por ejemplo, 32/2 = 16, si el número en la posición 16 es mayor al número buscado, entonces eliminaremos los números de la posición 16 a la 32 y buscaremos de la 0 a la 15 y así sucesivamente*/
