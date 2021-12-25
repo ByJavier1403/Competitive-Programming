@@ -2,7 +2,7 @@ struct Rectangulo{
   int x1,y1,x2,y2;
 };
 
-bool area(Rectangulo a,Rectangulo b){
+bool interseccion(Rectangulo a,Rectangulo b){
   if(a.x1>=b.x2 || a.x2<=b.x1 || a.y1>= b.y2 || a.y2<=b.y1){
     return false;
   }else{
