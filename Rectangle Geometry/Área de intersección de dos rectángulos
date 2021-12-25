@@ -1,0 +1,7 @@
+struct Rectangulo{
+  int x1,y1,x2,y2;
+};
+
+bool area(Rectangulo a,Rectangulo b){
+  return (max(0,min(a.x2,b.x2)-max(a.x1,b.x1)))*(max(0,min(a.y2,b.y2)-max(a.y1,b.y1)));
+}
