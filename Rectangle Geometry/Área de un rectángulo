@@ -1,0 +1,7 @@
+/*La fórmula para encontrar el área de un rectángulo es base*altura
+Dados dos puntos coordenados es posible encontrar su área*/
+long long area(int x1,y1,x2,y2){
+  long long altura = y2-y1;
+  long long base = x2-x1;
+  return base*altura;
+}
