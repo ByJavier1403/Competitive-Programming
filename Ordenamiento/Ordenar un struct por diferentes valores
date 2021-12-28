@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+//Se crea la struct
+struct Num{
+  int a,i;
+  char c;
+  bool operator <(const Num& other){
+    return a>other.a;
+  }
+};
+
+//Se crea un struct por medio de la cual se va a ordenar la struct inicial por medio de uno de los elementos que tiene la struct
+struct OrdenarPorValor {
+  bool operator() (Num i,Num j) { 
+    return (i.a>j.a);
+  }
+} OrdenarPorValor;
+
+//Se crear un struct para ordenar la struct inicial por medio de otro valor
+struct OrdenarPorIndice {
+   bool operator() (Num i,Num j) { 
+    return (i.i<j.i);
+  }
+} OrdenarPorIndice;
+
+//Función en donde se resuelve el problema
+void solved(){
+  int n,l=0,ai,af;
+  Num *v;
+  cin>>n;
+  ai=n;
+  v = new Num [n];
+  for(int i=0;i<n;i++){
+    cin>>v[i].a;
+    v[i].i = i;
+  }
+  for(int i=0;i<n;i++){
+    cin>>v[i].c;
+    if(v[i].c=='1'){
+      l++;
+    }
+  }
+  af=n-l;
+  //En el ordenamiento se pasa por 3er parámetro la struct que tiene el ordenamiento que queremos hacer en ese momento
+  sort(v,v+n,OrdenarPorValor);
+  for(int i=0;i<n;i++){
+    if(v[i].c=='1'){
+      v[i].a = ai;
+      ai--;
+    }else{
+      v[i].a = af;
+      af--;
+    }
+  }
+  sort(v,v+n,OrdenarPorIndice);
+  for(int i=0;i<n;i++){
+    cout<<v[i].a<<" ";
+  }
+  cout<<"\n";
+}
+ 
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cout<<fixed;
+  int n;
+  cin>>n;
+  while(n--){
+    solved();
+  }
+}
