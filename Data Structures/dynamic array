@@ -1,0 +1,29 @@
+//Inicialización 
+vector<tipo_de_dato> nombre;
+
+//Definir tamaño
+//Primer forma
+vector<tipo_de_dato> nombre(tamaño);
+//Segunda forma
+vector<tipo_de_dato> nombre; nombre.resize(tamaño);
+
+//Saber el tamaño de la matriz 
+int n = size(v);
+
+//Primer valor de la matriz
+v.begin();
+
+//Último valor de la matriz
+v.end();
+
+//Insertar un elemento a la siguiente casilla libre
+v.push_back(elemento);
+
+//Insertar un elemento en una casilla determinada 
+v[casilla] = elemento;
+
+//Eliminar un elemento 
+v.erase(v.begin()+elemento);
+
+//Borrar un rango de elementos (El ejemplo borra desde el inicio hasta la posición elemento)
+v.erase(v.begin(),v.begin()+elemento);
