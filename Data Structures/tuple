@@ -1,0 +1,11 @@
+//Inicialización
+tuple<tipo_de_dato,tipo_de_dato,...,tipo_de_dato> nombre;
+
+//Agregar valores
+//Opción 1
+nombre = make_tuple(a,b,c,...,d);
+//Opción 2
+nombre=tie(a,b,c,...,d);
+
+//Obtener el valor de determinado índice
+cout<<get<índice>(nombre);
