@@ -1,0 +1,8 @@
+//Inicialización 
+array<tipo_de_dato,tamaño> nombre;
+
+//Acceder a una posición dentro de la matriz
+arr[posición];
+
+//Inicializar una matriz en algún valor determinado (por ejemplo 0) 
+fill_n(arr,arr+tamaño,0);
