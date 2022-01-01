@@ -5,4 +5,4 @@ array<tipo_de_dato,tamaño> nombre;
 arr[posición];
 
 //Inicializar una matriz en algún valor determinado (por ejemplo 0) 
-fill_n(arr,arr+tamaño,0);
+fill(arr.begin(),arr.begin(),0); 
