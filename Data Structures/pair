@@ -1,0 +1,11 @@
+//Inicialización
+pair<tipo_de_dato,tipo_de_dato> nombre;
+
+//Agregar valores
+nombre = make_pair(dato1,dato2);
+
+//Acceder al primer valor
+nombre.first;
+
+//Aceder al segundo valor;
+nombre.second;
