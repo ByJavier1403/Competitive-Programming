@@ -3,7 +3,6 @@ using namespace std;
 typedef long long ll;
 
 int main() {
-  freopen("roboherd.in", "r", stdin);
-  freopen("roboherd.out", "w", stdout);
-  //Leer con ri(variable); e imprimir con cout
+  ifstream fin("speeding.in");
+  ofstream fout("speeding.out");
 }
