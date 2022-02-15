@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cout<<fixed;
+  int n,e,t,a,b,c=0;
+  cin>>n>>e>>t;
+  vector<vector<int>> adj(e*2);
+  queue<int> q;
+  vector<bool> used(n);
+  for(int i=0;i<e;i++){
+    cin>>a>>b;
+    adj[a].push_back(b);
+    adj[b].push_back(a);
+  }
+  q.push(n);
+  used[n] = true;
+  for(int i=0;i<t;i++){
+    int v = q.front();
+    q.pop();
+    for(int u:adj[v]){
+      if(!used[u]){
+        used[u] = true;
+        q.push(u);
+        c++;
+      }
+    }
+  }
+  cout<<c;
+}
