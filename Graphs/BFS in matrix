@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool seguir = true;
+
+int cx[4]={1,-1,0,0};
+int cy[4]={0,0,1,-1};
+
+class estado{
+  public:
+  int x,y;
+  estado(int ix,int iy){
+    x = ix, y=iy;
+  }
+};
+
+class posiciones{
+  public:
+  bool encontrado = false;
+  int pos;
+};
+
+void solved(int r,int c, int y){
+  int contador=1;
+  int movimiento;
+  char m[20][20];
+  posiciones encontrado[20][20];
+  queue<estado> cola;
+  if(r!=0 && c!=0 && y!=0){
+    for(int i=0;i<r;i++){
+      for(int j=0;j<c;j++){
+        cin>>m[i][j];
+      }
+    }
+    estado ini(0,y-1);
+    encontrado[0][y-1].encontrado = true;
+    encontrado[0][y-1].pos = contador;
+    contador++;
+    cola.push(ini);
+    while(!cola.empty()){
+      estado top = cola.front();
+      cola.pop();
+      switch(m[top.x][top.y]){
+        case 'S':
+          movimiento = 0;
+        break;
+        case 'W':
+          movimiento = 3;
+        break;
+        case 'E':
+          movimiento = 2;
+        break;
+        case 'N':
+          movimiento = 1;
+        break;
+      }
+      int nuevox = top.x + cx[movimiento];
+      int nuevoy = top.y + cy[movimiento];
+      if(nuevox>=0 && nuevox<r && nuevoy>=0 && nuevoy<c){
+        if(!encontrado[nuevox][nuevoy].encontrado){
+          estado nuevo(nuevox,nuevoy);
+          cola.push(nuevo);
+          encontrado[nuevox][nuevoy].encontrado = true;
+          encontrado[nuevox][nuevoy].pos = contador;
+          contador++;
+        }else{
+          cout<<encontrado[nuevox][nuevoy].pos-1<<" step(s) before a loop of "<<contador-encontrado[nuevox][nuevoy].pos<<" step(s)"<<endl;
+          while(!cola.empty()){
+            cola.pop();
+          }
+        }
+      }else{
+        cout<<contador-1<<" step(s) to exit"<<endl;
+        while(!cola.empty()){
+          cola.pop();
+        }
+      }
+    }
+  }else{
+    seguir = false;
+  }
+}
+
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cout<<fixed;
+  int r,c,y;
+  while(seguir){
+    cin>>r>>c>>y;
+    solved(r,c,y);
+  }
+}
