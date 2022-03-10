@@ -1,0 +1,170 @@
+
+package primerparcialedg1_ene.mayo2022;
+
+import java.util.ArrayList;
+/**
+ *
+ * @author Javier David Hernández Estrada 203218
+ */
+public class PrimerParcialEDG1_eneMayo2022 {
+    
+    public static void main(String[] args) {
+        //Problema 1
+        //Caso en donde todos son enteros
+        System.out.println("Problema 1 Caso 1");
+        PilaADT elementos1 = new PilaA<>();
+        for(int i=10;i>=1;i--){
+            elementos1.push(i);
+        }
+        ArrayList<Integer> muestra1 = new ArrayList<>();
+        try{
+            muestra1 = muestraEnteros(elementos1);
+            for(int i=0;i<muestra1.size();i++){
+                System.out.println(muestra1.get(i));
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        //Caso en donde todos son String validos
+        System.out.println("Problema 1 Caso 2");
+        PilaADT elementos2 = new PilaA<>();
+        elementos2.push("1");
+        elementos2.push("2");
+        elementos2.push("3");
+        elementos2.push("4");
+        ArrayList<Integer> muestra2 = new ArrayList<>();
+        try{
+            muestra2 = muestraEnteros(elementos2);
+            for(int i=0;i<muestra2.size();i++){
+                System.out.println(muestra2.get(i));
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        //Caso en donde no hay ni String ni enteros
+        System.out.println("Problema 1 Caso 3");
+        Persona persona = new Persona("Javier");
+        PilaADT elementos3 = new PilaA<>();
+        Persona per = new Persona("122");
+        elementos3.push(persona);
+        elementos3.push(per);
+        ArrayList<Integer> muestra3 = new ArrayList<>();
+        try{
+            muestra3 = muestraEnteros(elementos3);
+            for(int i=0;i<muestra3.size();i++){
+                System.out.println(muestra3.get(i));
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        //Caso en donde los String no son validos
+        System.out.println("Problema 1 Caso 4");
+        PilaADT elementos4 = new PilaA<>();
+        elementos4.push("Javier");
+        elementos4.push("diez");
+        ArrayList<Integer> muestra4 = new ArrayList<>();
+        try{
+            muestra4 = muestraEnteros(elementos4);
+            for(int i=0;i<muestra4.size();i++){
+                System.out.println(muestra4.get(i));
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        //Caso mezclado
+        System.out.println("Problema 1 Caso 5");
+        PilaADT elementos5 = new PilaA<>();
+        elementos5.push(1);
+        elementos5.push(10.9);
+        elementos5.push("122");
+        elementos5.push("Javier");
+        elementos5.push(persona);
+        ArrayList<Integer> muestra5 = muestraEnteros(elementos5);
+        for(int i=0;i<muestra5.size();i++){
+            System.out.println(muestra5.get(i));
+        }
+        //Problema 2
+        //Caso base verdadero
+        System.out.println("Problema 2 Caso 1");
+        PilaADT cadena1 = new PilaA<>();
+        cadena1.push("azul");
+        cadena1.push("carmín");
+        cadena1.push("rosado");
+        cadena1.push("verde");
+        System.out.println(ordenCreciente(cadena1));
+        //Caso base falso
+        System.out.println("Problema 2 Caso 2");
+        PilaADT cadena2 = new PilaA<>();
+        cadena2.push("azul");
+        cadena2.push("amarillo");
+        cadena2.push("negro");
+        cadena2.push("rojo");
+        System.out.println(ordenCreciente(cadena2));
+        //Caso en donde la pila esta vacia en donde considere que estaba ordenada al no haber ningun elemento
+        System.out.println("Problema 2 Caso 3");
+        PilaADT cadena3 = new PilaA<>();
+        System.out.println(ordenCreciente(cadena3));
+    }
+    
+    public static ArrayList<Integer> muestraEnteros(PilaADT elementos){
+        ArrayList<Integer> res = new ArrayList<>();
+        //Uso un objeto para poder comprobar con todos y cada uno de los elementos que me sean dados, ya sean enteros, rectangulos,etc.
+        Object actual;
+        String cadena;
+        PilaADT copia = new PilaA<>();
+        boolean isNumero = true;
+        int i=0;
+        while(!elementos.isEmpty()){
+            actual = elementos.peek();
+            //Caso facil, donde lo que checo ya es un entero
+            if(actual instanceof Integer){
+                res.add((Integer) actual);
+            //Caso "complejo", donde lo que checo es un String
+            }else if(actual instanceof String){
+                cadena = (String) actual;
+                while(i<cadena.length() && isNumero){
+                    //Checar con ASCII si todos y cada uno de los char's que forman al String son números o no
+                    if(cadena.charAt(i)<'0' || cadena.charAt(i)>'9'){
+                        isNumero = false;
+                    }
+                    i++;
+                }
+                //Si es numero entonces lo agrego
+                if(isNumero){
+                    res.add(Integer.parseInt(cadena));
+                }
+                isNumero = true;
+            }
+            copia.push(elementos.pop());
+        }
+        //Dejar la pila tal cual estaba
+        while(!copia.isEmpty()){
+            elementos.push(copia.pop());
+        }
+        //Si no hay elementos entonces tengo mi excepcion
+        if(res.size()>=1){
+            return res;
+        }else{
+            throw new EmptyCollectionException("NO existen números en la pila actual");
+        }
+    }
+    
+    public static boolean ordenCreciente(PilaADT cadena){
+        boolean res = true;
+        PilaA auxiliar = new PilaA<>();
+        if(!cadena.isEmpty()){
+            auxiliar.push(cadena.pop());
+            while(!cadena.isEmpty() && res){
+                //Al ser todo String puedo comparar de esta manera
+                if(cadena.peek().toString().compareTo(auxiliar.peek().toString())>=1){
+                    res = false;
+                }
+                auxiliar.push(cadena.pop());
+            }
+            while(!auxiliar.isEmpty()){
+                cadena.push(auxiliar.pop());
+            }
+        }
+        return res;
+    }
+}
