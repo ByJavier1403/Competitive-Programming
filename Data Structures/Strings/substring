@@ -1,0 +1,4 @@
+//Obtener un substring
+string s="We think in generalities, but we live in details.";
+string sub=s.substr(n,m); //think 
+//Inicia en la posición n y termina cuando la longitud de la nueva cadena es m
