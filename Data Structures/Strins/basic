@@ -1,0 +1,6 @@
+//Lectura de una palabra (hasta antes de un espacio)
+string s;
+cin>>s;
+
+//Lectura de una cadena completa (hasta antes de un salto de línea) 
+getline(cin,s,'\n');
